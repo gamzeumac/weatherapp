@@ -29,11 +29,11 @@ function App() {
   
 
   const API_key = process.env.REACT_APP_API_key;
-  const url = (`http://api.openweathermap.org/data/2.5/weather?q=${inputCity}&appid=${API_key}`)
+ 
  
   const submitHandler = async  (e) =>{
    e.preventDefault();
-   const weatherApi = await fetch(url);
+   const weatherApi = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${inputCity}&appid=${API_key}`);
    const weatherApiJson = await weatherApi.json();  
    setWeatherData(weatherApiJson);
    setInputCity("");
