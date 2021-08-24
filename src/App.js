@@ -29,7 +29,7 @@ function App() {
  
   const submitHandler = async  (e) =>{
    e.preventDefault();
-   const weatherApi = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${inputCity}&appid=${API_key}`);
+   const weatherApi = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${inputCity}&appid=${API_key}`);
    const weatherApiJson = await weatherApi.json();  
    setWeatherData(weatherApiJson);
    setInputCity("");
@@ -39,7 +39,7 @@ function App() {
 
 
  useEffect( async () => {
-  const urlonLoad = (`http://api.openweathermap.org/data/2.5/weather?q=berlin&appid=${API_key}`)
+  const urlonLoad = (`https://api.openweathermap.org/data/2.5/weather?q=berlin&appid=${API_key}`)
   const weatherApionLoad = await fetch(urlonLoad);
   const weatherApiJsononLoad = await weatherApionLoad.json();  
   setWeatherData(weatherApiJsononLoad);
