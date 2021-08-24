@@ -1,6 +1,12 @@
-.App{
-  min-height: 100vh;
-  background-image: linear-gradient(120deg, #a8ebc1 0%, #dff79d 100%);
+body{
+  font-family: 'montserrat', sans-serif;
+  color: #fff;
+
+  background-image: url("weather.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
 }
 
 .cards{
@@ -13,4 +19,5 @@
 }
 .inputGroup{
   margin: auto;
+  
 }

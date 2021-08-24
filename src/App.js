@@ -1,8 +1,12 @@
 import './App.css';
-import {useState} from "react";
+import {useState , useEffect} from "react";
 import {Card, Button,InputGroup, FormControl} from "react-bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "weather-icons/css/weather-icons.min.css";
+require('dotenv').config();
+ 
 
-
+ 
 function App() {
 
   const getCurrentDate =(d)=>{
@@ -21,34 +25,44 @@ function App() {
   const [weatherData, setWeatherData] = useState({});
   const [inputCity,setInputCity] = useState("");
   const [isVisible, setIsVisible] = useState(false);
+  const [query, setQuery] = useState("Berlin")
   
 
-  const API_KEY = process.env.REACT_APP_API_KEY;
-
+  const API_key = process.env.REACT_APP_API_key;
+  const url = (`http://api.openweathermap.org/data/2.5/weather?q=${inputCity}&appid=${API_key}`)
  
-  const submitHandler = async (e)=>{
+  const submitHandler = async  (e) =>{
    e.preventDefault();
-
-   const weatherApi = await fetch (`http://api.openweathermap.org/data/2.5/weather?q=${inputCity}&appid=${API_KEY}`);
-   const weatherApiJson = await weatherApi.json();
-   console.log(weatherApiJson);
+   const weatherApi = await fetch(url);
+   const weatherApiJson = await weatherApi.json();  
    setWeatherData(weatherApiJson);
    setInputCity("");
-   setIsVisible(true);
- 
-   
+   setIsVisible(true);   
+   setQuery("") 
  };
+
+
+ useEffect( async () => {
+  const urlonLoad = (`http://api.openweathermap.org/data/2.5/weather?q=berlin&appid=${API_key}`)
+  const weatherApionLoad = await fetch(urlonLoad);
+  const weatherApiJsononLoad = await weatherApionLoad.json();  
+  setWeatherData(weatherApiJsononLoad);
+  setInputCity("");
+  setIsVisible(true);   
+  setQuery("") 
+
+  }, []);
+
+
  const inputHandler = (e)=>{
    setInputCity(e.target.value);
 
  }
+
+ 
   return (
-    <div className="App">
-    <div className="container">
-      <div className="row ">
-       
-      <h1 className=" text-center mt-5">Weather App</h1>
-      <div className="justify-content-center d-flex align-items-center">
+    <div className="container"  >
+      <h1 className=" text-center mt-5 text-warning">Weather App</h1>
       <InputGroup className="mb-3 inputGroup" style={{width:"30rem"}}  >
         <FormControl
           placeholder="City name.."
@@ -57,14 +71,15 @@ function App() {
           onChange ={inputHandler}
           value={inputCity}
         />
-        <Button type="submit" onClick={submitHandler} variant="outline-secondary" id="button-addon2">
+        <Button type="submit" className="btn btn-warning text-dark" onClick={submitHandler} variant="outline-warning" id="button-addon2">
           Search
         </Button>
       </InputGroup>
-      </div>
+
+      
         < >
         {!weatherData.name ?(
-          <h4 className="text-center">"Please write a city name"</h4>
+          <h4 className="text-center text-dark">"Please write a city name"</h4>
           
         ): (
           <Card className="cards mt-5" style={{width:"30rem", visibility: isVisible ? "visible" : "hidden"}}>
@@ -96,10 +111,8 @@ function App() {
       </Card>
         )}
         </>
-        </div>
-        </div>
+     
     </div>
-    
   );
 }
 
