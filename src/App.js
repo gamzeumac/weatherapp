@@ -38,7 +38,7 @@ function App() {
  };
 
 
- useEffect( async () => {
+/*  useEffect( async () => {
   const urlonLoad = (`https://api.openweathermap.org/data/2.5/weather?q=berlin&appid=${API_key}`)
   const weatherApionLoad = await fetch(urlonLoad);
   const weatherApiJsononLoad = await weatherApionLoad.json();  
@@ -47,7 +47,7 @@ function App() {
   setIsVisible(true);   
   setQuery("") 
 
-  }, []);
+  }, []); */
 
 
  const inputHandler = (e)=>{
